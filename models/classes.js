@@ -53,4 +53,5 @@ const classesSchema=new Schema({
 
 });
 
-module.exports=mongoose.model("classes",classesSchema);
+const classes=mongoose.model("classes",classesSchema);
+module.exports=classes;

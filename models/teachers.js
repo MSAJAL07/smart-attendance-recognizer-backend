@@ -43,4 +43,5 @@ const teachersSchema=new Schema({
    
 });
 
-module.exports=mongoose.model("teachers",teachersSchema);
+const teachers=mongoose.model("teachers",teachersSchema);
+module.exports=teachers;

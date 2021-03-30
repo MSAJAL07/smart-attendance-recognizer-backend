@@ -49,4 +49,5 @@ const studentsSchema=new Schema({
 
 });
 
-module.exports=mongoose.model("students",studentsSchema);
+const students=mongoose.model("students",studentsSchema);
+module.exports=students;

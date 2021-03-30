@@ -1,5 +1,4 @@
 const mongoose=require('mongoose');
-const { user } = require('../config/db');
 const constants=require('../constants/constants');
 const usersSchema=new mongoose.Schema({
    username:{
@@ -7,7 +6,7 @@ const usersSchema=new mongoose.Schema({
       required:true,
       unique:true
    },
-   eamil_id:{
+   email_id:{
       type:String,
       required:true,
       unique:true
