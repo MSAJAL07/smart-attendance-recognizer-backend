@@ -1,7 +1,11 @@
 const mongoose=require('mongoose');
 
 mongoose.connect(process.env.DATABASE_URL,{
-useNewUrlParser:true
+   useNewUrlParser: true,
+   useUnifiedTopology: true,
+   useCreateIndex: true,
+   retryWrites: true,
+   useFindAndModify: false,
 });
 
 const db=mongoose.connection;
