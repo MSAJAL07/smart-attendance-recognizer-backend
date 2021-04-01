@@ -17,4 +17,5 @@ const organizationsSchema=new Schema({
    }
 });
 
-module.exports=mongoose.model("organizations",organizationsSchema);
+const organizations=mongoose.model("organizations",organizationsSchema);
+module.exports=organizations;
