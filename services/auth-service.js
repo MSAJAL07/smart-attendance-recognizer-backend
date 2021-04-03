@@ -9,16 +9,16 @@ module.exports.generateToken=async (user,expiresIn)=>
 
 module.exports.verifyToken=async (token)=>{
    var response;
-   jwt.verify(token,process.env.ACCESS_TOKEN_SECRET,(err,user)=>{
-      if(err) response={
+   var user=await jwt.verify(token,process.env.ACCESS_TOKEN_SECRET);
+   console.log(user);
+      if(!user) response={
          status: false,
          statuscode:constants.statuscodes.unauthorized,
          message: "Invalid token"
       };
       else  response={
-         status: false,
+         status: true,
          data:user
       }
-   });
    return response;
 }
