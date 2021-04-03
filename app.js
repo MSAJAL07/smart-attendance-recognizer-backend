@@ -10,6 +10,7 @@ envFile.config();
 const config=require('./config/config');
 const routes=require('./routes/router');
 const db=require('./config/db');
+const errorHandler=require('./controllers/ErrorController');
 
 var app=express();
 
@@ -44,6 +45,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use('/api/v1/',routes);
 
+app.use(errorHandler);
 db.on('connected',()=>console.log("Succesfully connected to database!!"));
 app.listen(config.server.port,()=>{console.log("Server started and listening on port:",config.server.port)});
 
