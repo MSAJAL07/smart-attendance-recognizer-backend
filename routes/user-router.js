@@ -1,6 +1,19 @@
 /**
  * @swagger
- * definition:
+ * securityDefinitions:
+ *      bearerAuth:
+ *          type: apiKey
+ *          schema: bearer
+ *          name: Authorization
+ *          bearerFormat: JWT
+ *          in: "header"
+ * security:
+ *        - bearerAuth: []
+ */
+
+/**
+ * @swagger
+ * definitions:
  *   LoginDetails:
  *     properties:
  *       email_id:
@@ -14,8 +27,8 @@
  * /api/v1/login:
  *   post:
  *     tags:
- *       - common-controller
- *     description: Service Provider Login Details
+ *       - user-controller
+ *     description: User Login Details
  *     produces:
  *       - application/json
  *     parameters:
