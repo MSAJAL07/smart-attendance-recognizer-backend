@@ -2,6 +2,9 @@ const bcrypt=require('bcrypt');
 const constants=require('../constants/constants');
 const userModel=require('../models/users');
 const  organizationModel=require('../models/organizations');
+const studentModel=require('../models/students');
+const teacherModel=require('../models/teachers');
+const crypto=require('crypto');
 
 module.exports.adminRegistration=async (body)=>{
       var user=await userModel.findOne({email_id:body.email_id,user_type:constants.roles.admin});
@@ -60,5 +63,44 @@ module.exports.adminRegistration=async (body)=>{
       }
    
    
+
+}
+
+
+module.exports.studentRegistration=async (body,user)=>
+{
+   
+   var admin=await userModel.findById(user.id);
+   var org_id= admin.org_id;
+   var studentObject={
+      name:body.name,
+      phone_number:body.phone_number,
+      email_id:body.email_id,
+      gender: body.gender,
+      enrollment_number: body.enrollment_number,
+      address: body.address,
+      year:body.year,
+      branch:body.branch,
+      date_of_birth:body.date_of_birth,
+      org_id:org_id
+   };
+   var student=await studentModel.create(studentObject);
+   
+   var password=crypto.randomBytes(64).toString('hex').substring(0,8);
+   const hashedPassword=await bcrypt.hash(password,10);
+   var userStudent={
+      username:body.phone_number.toString(),
+      email_id:body.email_id,
+      password:hashedPassword,
+      user_type:constants.roles.student,
+      org_id:org_id
+   };
+   var userCreated=userModel.create(userStudent);
+   //send mail to student and email,username and password
+   return {
+      status:true,
+      data:{org_id:org_id},
+      message: "Student created successfully"
+   }
 
 }

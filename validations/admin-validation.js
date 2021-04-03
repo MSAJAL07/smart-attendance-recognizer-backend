@@ -12,3 +12,18 @@ module.exports.adminRegistrationValidation=async (data)=>{
    });
    return await adminValidationSchema.validate(data);
 }
+
+module.exports.studentRegistrationValidation=async (data)=>{
+   const studentValidationSchema=Joi.object().keys({
+      name:Joi.string().regex(regex.nameRegex).required(),
+      phone_number:Joi.string().regex(regex.phoneRegex).required(),
+      email_id:Joi.string().email().required(),
+      gender: Joi.string().valid('M','F').required(),
+      enrollment_number: Joi.string(),
+      address: Joi.string().required(),
+      year:Joi.string().required(),
+      branch:Joi.string().required(),
+      date_of_birth:Joi.date().required()
+   });
+   return await studentValidationSchema.validate(data);
+} 

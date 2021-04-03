@@ -25,3 +25,22 @@ module.exports.adminRegistration=async (req,res,next)=>{
       return next(error);
     }
 }
+
+module.exports.studentRegistration=async (req,res,next)=>{
+   try{
+        await adminValidation.studentRegistrationValidation(req.body);
+        var result=await adminService.studentRegistration(req.body,req.user);
+
+        if(result.status)
+        {
+           return response(req,res,result.message,result.data,constants.statuscodes.success);
+        }
+        else{
+           return next(new AppError(result.message,result.statuscode));
+        }
+
+   }catch(error)
+   {
+     return next(error);
+   }
+}
