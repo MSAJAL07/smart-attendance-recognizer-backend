@@ -1,5 +1,6 @@
 const mongoose=require('mongoose');
 const Schema=mongoose.Schema;
+const uniqueValidator=require('mongoose-unique-validator');
 
 const teachersSchema=new Schema({
    teacher_id:{
@@ -14,7 +15,8 @@ const teachersSchema=new Schema({
       unique:true
    },
    email_id:{
-      type:String
+      type:String,
+      unique: true
    },
    gender:
    {
@@ -42,6 +44,11 @@ const teachersSchema=new Schema({
    }
    
 });
+
+teachersSchema.plugin(uniqueValidator,{
+   message: 'Error: expected {PATH} to be unique.',
+})
+
 
 const teachers=mongoose.model("teachers",teachersSchema);
 module.exports=teachers;
