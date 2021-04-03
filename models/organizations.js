@@ -15,6 +15,8 @@ const organizationsSchema=new Schema({
    logo:{
       type:String
    }
+},{
+   timestamps:true
 });
 
 const organizations=mongoose.model("organizations",organizationsSchema);
