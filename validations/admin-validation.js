@@ -27,3 +27,16 @@ module.exports.studentRegistrationValidation=async (data)=>{
    });
    return await studentValidationSchema.validate(data);
 } 
+
+module.exports.teacherRegistrationValidation=async (data)=>{
+   const teacherValidationSchema=Joi.object().keys({
+      name:Joi.string().regex(regex.nameRegex).required(),
+      phone_number:Joi.string().regex(regex.phoneRegex).required(),
+      email_id:Joi.string().email().required(),
+      gender: Joi.string().valid('M','F').required(),
+      faculty_id: Joi.string(),
+      address: Joi.string().required(),
+      date_of_birth:Joi.date().required()
+   });
+   return await teacherValidationSchema.validate(data);
+} 

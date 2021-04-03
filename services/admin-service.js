@@ -72,7 +72,20 @@ module.exports.studentRegistration=async (body,user)=>
    
    var admin=await userModel.findById(user.id);
    var org_id= admin.org_id;
+   
+   var password=crypto.randomBytes(64).toString('hex').substring(0,8);
+   const hashedPassword=await bcrypt.hash(password,10);
+   var userStudent={
+      username:body.phone_number.toString(),
+      email_id:body.email_id,
+      password:hashedPassword,
+      user_type:constants.roles.student,
+      org_id:org_id
+   };
+   var userCreated=await userModel.create(userStudent);
+
    var studentObject={
+      student_id:userCreated._id,
       name:body.name,
       phone_number:body.phone_number,
       email_id:body.email_id,
@@ -85,22 +98,50 @@ module.exports.studentRegistration=async (body,user)=>
       org_id:org_id
    };
    var student=await studentModel.create(studentObject);
-   
-   var password=crypto.randomBytes(64).toString('hex').substring(0,8);
-   const hashedPassword=await bcrypt.hash(password,10);
-   var userStudent={
-      username:body.phone_number.toString(),
-      email_id:body.email_id,
-      password:hashedPassword,
-      user_type:constants.roles.student,
-      org_id:org_id
-   };
-   var userCreated=userModel.create(userStudent);
    //send mail to student and email,username and password
    return {
       status:true,
       data:{org_id:org_id},
       message: "Student created successfully"
+   }
+
+}
+
+
+module.exports.teacherRegistration=async (body,user)=>
+{
+   
+   var admin=await userModel.findById(user.id);
+   var org_id= admin.org_id;
+   
+   var password=crypto.randomBytes(64).toString('hex').substring(0,8);
+   const hashedPassword=await bcrypt.hash(password,10);
+   var userTeacher={
+      username:body.phone_number.toString(),
+      email_id:body.email_id,
+      password:hashedPassword,
+      user_type:constants.roles.teacher,
+      org_id:org_id
+   };
+   var userCreated=await userModel.create(userTeacher);
+
+   var teacherObject={
+      teacher_id:userCreated._id,
+      name:body.name,
+      phone_number:body.phone_number,
+      email_id:body.email_id,
+      gender: body.gender,
+      faculty_id: body.faculty_id,
+      address: body.address,
+      date_of_birth:body.date_of_birth,
+      org_id:org_id
+   };
+   var teacher=await teacherModel.create(teacherObject);
+   //send mail to teacher and email,username and password
+   return {
+      status:true,
+      data:{org_id:org_id},
+      message: "Teacher profile created successfully"
    }
 
 }

@@ -11,13 +11,13 @@ router.get('/',(req,res)=>{
 });
 
 
-router.post('/admin-registration',adminController.adminRegistration);
+router.post('/college-registration',adminController.adminRegistration);
 router.post('/login',userController.login);
 
 router.use(authController.authorizeToken);  /*AUTHORIZATION TOKEN VERIFICATION */
 
 router.post('/student-registration',authController.restrictTo(constants.roles.admin),adminController.studentRegistration);
-
+router.post('/teacher-registration',authController.restrictTo(constants.roles.admin),adminController.teacherRegistration);
 
 
 module.exports=router;

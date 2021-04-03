@@ -20,7 +20,8 @@ const teachersSchema=new Schema({
    },
    gender:
    {
-      type:String
+      type:String,
+      enum:['M','F']
    },
    faculty_id:{
       type:String
