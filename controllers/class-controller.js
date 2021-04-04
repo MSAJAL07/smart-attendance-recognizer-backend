@@ -21,3 +21,21 @@ module.exports.crerateClass=async (req,res,next)=>{
    }
 
 }
+
+module.exports.addStudents=async (req,res,next)=>{
+   try{
+      var result=await classService.addStudents(req.body,req.params.id,req.user);
+      if(result.status==true)
+      {
+         return response(req,res,result.message,result.data,constants.statuscodes.success);
+      }
+      else 
+      {
+         next(new AppError(result.message,result.statuscode));
+      }
+   }catch(error)
+   {
+      next(error);
+   }
+
+}

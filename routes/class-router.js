@@ -42,7 +42,7 @@
 
 /**
  * @swagger
- * /api/v1/create-class:
+ * /api/v1/classes/create-class:
  *   post:
  *     security:
  *      - bearerAuth: []
@@ -62,6 +62,51 @@
  *     responses:
  *       200:
  *         description: class created Successfully 
+ *         content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ */
+
+
+/**
+ * @swagger
+ * definitions:
+ *    studentsArray:
+ *         properties:
+ *          students:
+ *              type: array
+ *              items:
+ *                   type: string
+ */
+
+/**
+ * @swagger
+ * /api/v1/classes/{id}/add-students:
+ *   put:
+ *     security:
+ *      - bearerAuth: []
+ *     tags:
+ *       - class-controller
+ *     description: Add students
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         description: id of class.
+ *         in: path
+ *         required: true
+ *         type: string
+ *       - name: studentsArray
+ *         description: student's id list
+ *         in: body
+ *         required: true
+ *         schema:
+ *           type: object
+ *           $ref: '#/definitions/studentsArray'
+ *     responses:
+ *       200:
+ *         description: list of students added
  *         content:
  *            application/json:
  *              schema:

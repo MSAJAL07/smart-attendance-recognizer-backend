@@ -21,6 +21,6 @@ router.post('/student-registration',authController.restrictTo(constants.roles.ad
 router.post('/teacher-registration',authController.restrictTo(constants.roles.admin),adminController.teacherRegistration);
 
 /**********************class controller *************************/
-router.post('/create-class',authController.restrictTo(constants.roles.teacher,constants.roles.admin),classController.crerateClass);
-
+router.post('/classes/create-class',authController.restrictTo(constants.roles.teacher,constants.roles.admin),classController.crerateClass);
+router.put('/classes/:id/add-students',authController.restrictTo(constants.roles.teacher,constants.roles.admin),classController.addStudents);
 module.exports=router;
