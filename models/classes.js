@@ -1,4 +1,4 @@
-const { date } = require('joi');
+const { date, string } = require('joi');
 const mongoose=require('mongoose');
 const Schema=mongoose.Schema;
 
@@ -9,20 +9,16 @@ const classesSchema=new Schema({
    subject_name:{
       type:String,
    },
-   time_slots:[{
+   class_time:[{
       day:{
-         type:Array,
+         type:String,
          enum:['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
       },
-      time_duration:{
-         type:[String]
-      }
+      time_slots:[{
+         start_time: String,
+         end_time: String
+      }]
    }],
-   days:
-   {
-      type:[String],
-      enum:['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
-   },
    create_date:{
       type:Date
    },

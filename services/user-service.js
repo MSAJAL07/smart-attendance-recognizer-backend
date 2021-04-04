@@ -21,7 +21,7 @@ module.exports.login=async (data) =>{
       var matched=await bcrypt.compare(data.password,password);
       if(matched)
       {
-         token=await authService.generateToken({id:user._id,user_type:user.user_type});
+         token=await authService.generateToken({id:user._id,user_type:user.user_type,org_id:user.org_id});
          return {
             status:true,
             data:"",
