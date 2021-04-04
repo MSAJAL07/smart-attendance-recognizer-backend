@@ -5,8 +5,8 @@ const constants=require('../constants/constants');
 const AppError=require('../config/error');
 module.exports.crerateClass=async (req,res,next)=>{
    try{
-      await classValidation.crerateClassValidation(req.body);
-      var result=await classService.crerateClass(req.body,req.user);
+      await classValidation.createClassValidation(req.body);
+      var result=await classService.createClass(req.body,req.user);
       if(result.status==true)
       {
          return response(req,res,result.message,result.data,constants.statuscodes.success);

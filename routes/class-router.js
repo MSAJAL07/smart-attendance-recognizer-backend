@@ -44,6 +44,8 @@
  * @swagger
  * /api/v1/create-class:
  *   post:
+ *     security:
+ *      - bearerAuth: []
  *     tags:
  *       - class-controller
  *     description: Create new class
