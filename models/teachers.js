@@ -3,7 +3,7 @@ const Schema=mongoose.Schema;
 const uniqueValidator=require('mongoose-unique-validator');
 
 const teachersSchema=new Schema({
-   teacher_id:{
+   user_id:{
       type:Schema.Types.ObjectId,
       ref:"users"
    },

@@ -85,7 +85,7 @@ module.exports.studentRegistration=async (body,user)=>
    var userCreated=await userModel.create(userStudent);
 
    var studentObject={
-      student_id:userCreated._id,
+      user_id:userCreated._id,
       name:body.name,
       phone_number:body.phone_number,
       email_id:body.email_id,
@@ -126,7 +126,7 @@ module.exports.teacherRegistration=async (body,user)=>
    var userCreated=await userModel.create(userTeacher);
 
    var teacherObject={
-      teacher_id:userCreated._id,
+      user_id:userCreated._id,
       name:body.name,
       phone_number:body.phone_number,
       email_id:body.email_id,
