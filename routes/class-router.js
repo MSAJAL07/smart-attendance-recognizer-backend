@@ -113,3 +113,34 @@
  *                type: object
  */
 
+
+/**
+ * @swagger
+ * /api/v1/classes/get-classes:
+ *   get:
+ *     security:
+ *      - bearerAuth: []
+ *     tags:
+ *       - class-controller
+ *     description: Get classes of user
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: user_id
+ *         description: id of user (Not mandatory)
+ *         in: query
+ *         schema:
+*           type: string
+ *       - name: user_type
+ *         description: type of user("Student","Teacher") (Not mandatory)
+ *         in: query
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: list of classes for loggedin user
+ *         content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ */

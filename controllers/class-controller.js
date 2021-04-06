@@ -39,3 +39,21 @@ module.exports.addStudents=async (req,res,next)=>{
    }
 
 }
+
+module.exports.getClasses=async (req,res,next)=>{
+   try{
+      var result=await classService.getClasses(req.query,req.user);
+      if(result.status==true)
+      {
+         return response(req,res,result.message,result.data,constants.statuscodes.success);
+      }
+      else 
+      {
+         next(new AppError(result.message,result.statuscode));
+      }
+   }catch(error)
+   {
+      next(error);
+   }
+
+}

@@ -11,11 +11,13 @@ router.get('/',(req,res)=>{
       res.send("{message:'Welcome to my site'}");
 });
 
-
+/*********************user controller*****************************/
 router.post('/college-registration',adminController.adminRegistration);
 router.post('/login',userController.login);
 
 router.use(authController.authorizeToken);  /*AUTHORIZATION TOKEN VERIFICATION */
+
+router.get('/user-profile',userController.getUserProfile);
 /**********************admin controller *************************/
 router.post('/student-registration',authController.restrictTo(constants.roles.admin),adminController.studentRegistration);
 router.post('/teacher-registration',authController.restrictTo(constants.roles.admin),adminController.teacherRegistration);
@@ -23,4 +25,5 @@ router.post('/teacher-registration',authController.restrictTo(constants.roles.ad
 /**********************class controller *************************/
 router.post('/classes/create-class',authController.restrictTo(constants.roles.teacher,constants.roles.admin),classController.crerateClass);
 router.put('/classes/:id/add-students',authController.restrictTo(constants.roles.teacher,constants.roles.admin),classController.addStudents);
+router.get('/classes/get-classes',classController.getClasses);
 module.exports=router;
