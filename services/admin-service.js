@@ -115,6 +115,10 @@ module.exports.teacherRegistration=async (body,user)=>
    var org_id= admin.org_id;
    
    var password=crypto.randomBytes(64).toString('hex').substring(0,8);
+
+   console.log("username=",body.phone_number.toString());
+   console.log("pasword==",password);
+
    const hashedPassword=await bcrypt.hash(password,10);
    var userTeacher={
       username:body.phone_number.toString(),

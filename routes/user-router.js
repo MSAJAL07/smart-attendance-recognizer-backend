@@ -47,3 +47,24 @@
  *              schema:
  *                type: object
  */
+
+
+/**
+ * @swagger
+ * /api/v1/user-profile:
+ *    get:
+ *       security:
+ *          - bearerAuth: []
+ *       tags:
+ *          - user-controller
+ *       description: Get user profile
+ *       produces:
+ *          - application/json
+ *       responses:
+ *          200:
+ *             description: Successfully created
+ *             content:
+ *                application/json:
+ *                   schema:
+ *                      type: object
+ */

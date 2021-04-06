@@ -19,3 +19,20 @@ module.exports.login=async (req,res,next)=>{
    }
 }
 
+module.exports.getUserProfile=async (req,res,next) =>
+{
+   try{
+      var result=await userSrvice.getUserProfile(req.user);
+      if(result.status)
+      {
+         return response(req,res,result.message,result.data,constants.statuscodes.success);
+      }else
+      {
+         return next(new AppError(result.message,result.statuscode));
+      }
+   }catch(error)
+   {
+      next(error)
+   }
+}
+
