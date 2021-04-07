@@ -26,4 +26,5 @@ router.post('/teacher-registration',authController.restrictTo(constants.roles.ad
 router.post('/classes/create-class',authController.restrictTo(constants.roles.teacher,constants.roles.admin),classController.crerateClass);
 router.put('/classes/:id/add-students',authController.restrictTo(constants.roles.teacher,constants.roles.admin),classController.addStudents);
 router.get('/classes/get-classes',classController.getClasses);
+router.get('/classes/:class_id/get-students',classController.getStudents);
 module.exports=router;

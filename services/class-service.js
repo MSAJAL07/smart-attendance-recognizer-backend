@@ -138,3 +138,51 @@ module.exports.getClasses=async (query,user)=>{
    }
 
 }
+
+
+module.exports.getStudents=async (data)=>{
+   console.log(data);
+   var class_id = ObjectId(data.class_id);
+   var students=await classModel.aggregate([
+      {$match:{
+         _id: class_id
+      }},
+      {
+         $unwind:"$students"
+      },
+      {
+         $lookup:{
+            from: "students",
+            localField:"students",
+            foreignField:"user_id",
+            as: "studentObject"
+         }
+      },{
+         $unwind: "$studentObject"
+      },
+      {
+         $project:{
+            class_id:"$_id",
+            class_name:"$name",
+            subject_name: "$subject_name",
+            "user_id": "$studentObject.user_id",
+            "student_name": "$studentObject.name",
+            "phone_number": "$studentObject.phone_number",
+            "email_id": "$studentObject.email_id",
+            "gender": "$studentObject.gender",
+            "enrollment_number": "$studentObject.enrollment_number",
+            "address": "$studentObject.address",
+            "year": "$studentObject.year",
+            "branch": "$studentObject.branch",
+            "date_of_birth": "$studentObject.date_of_birth",
+            
+         }
+      }
+   ]);
+
+   return {
+      status:true,
+      data: students,
+      message: "Students list fetched successfully"
+   }
+}

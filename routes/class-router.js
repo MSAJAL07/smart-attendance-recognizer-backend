@@ -144,3 +144,29 @@
  *              schema:
  *                type: object
  */
+
+/**
+ * @swagger
+ * /api/v1/classes/{class_id}/get-students:
+ *   get:
+ *     security:
+ *      - bearerAuth: []
+ *     tags:
+ *       - class-controller
+ *     description: Get students in a class
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: class_id
+ *         description: id of class
+ *         in: path
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: list of classes for loggedin user
+ *         content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ */
