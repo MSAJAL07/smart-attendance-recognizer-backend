@@ -2,7 +2,7 @@ const classModel=require('../models/classes');
 const studentModel=require('../models/students');
 const teacherModel=require('../models/teachers');
 const constants=require('../constants/constants');
-
+var ObjectId = require('mongodb').ObjectID;
 
 
 module.exports.createClass=async (data,user)=>{
@@ -38,7 +38,7 @@ module.exports.addStudents=async (data,class_id,user)=>{
 }
 
 module.exports.getClasses=async (query,user)=>{
-   var classes;
+   var classes=[];
    var user_type;
    var user_id;
    if(query.user_id && query.user_type)
@@ -54,8 +54,9 @@ module.exports.getClasses=async (query,user)=>{
 
    if(user_type==constants.roles.teacher)
       {
+         console.log(user);
          classes=await teacherModel.aggregate([
-            {$match: {user_id:user_id}},
+            {$match: {user_id:ObjectId(user_id)}},
             {
                $unwind: "$classes"
             },
@@ -79,9 +80,9 @@ module.exports.getClasses=async (query,user)=>{
                   "create_date":"$clasObject.create_date",
                   "class_picture":"$class_picture",
                   "teacher_name":"$name",
-                  "email_id":"email_id"
+                  "email_id":"$email_id"
                }
-            }
+            } 
          ]);
 
          return {
@@ -94,7 +95,7 @@ module.exports.getClasses=async (query,user)=>{
    if(user_type==constants.roles.student)
    {
       classes=await studentModel.aggregate([
-         {$match: {user_id:user_id}},
+         {$match: {user_id:ObjectId(user_id)}},
          {
             $unwind: "$classes"
          },
@@ -118,7 +119,7 @@ module.exports.getClasses=async (query,user)=>{
                "create_date":"$clasObject.create_date",
                "class_picture":"$class_picture",
                "teacher_name":"$name",
-               "email_id":"email_id"
+               "email_id":"$email_id"
             }
          }
       ]);
