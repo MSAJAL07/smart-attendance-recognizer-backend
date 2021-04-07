@@ -101,7 +101,7 @@ module.exports.studentRegistration=async (body,user)=>
    //send mail to student and email,username and password
    return {
       status:true,
-      data:{org_id:org_id},
+      data:student,
       message: "Student created successfully"
    }
 

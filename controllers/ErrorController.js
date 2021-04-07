@@ -64,7 +64,7 @@ const handleSwaggerError = err => {
 }
 
 module.exports = (err, req, res, next) => {
-   // console.log(err)
+    console.log(err)
     err.statusCode = err.statusCode || statuscodes.internal;
     err.status = err.status || 'Error';
     if (err.name === 'CastError') err = handleCastErrorDB(err);
