@@ -164,3 +164,24 @@
  */
 
 
+/**
+ * @swagger
+ * /api/v1/get-all-students:
+ *    get:
+ *       security:
+ *          - bearerAuth: []
+ *       tags:
+ *          - admin-controller
+ *       description: List of all students in a college
+ *       produces:
+ *          - application/json
+ *       responses:
+ *          200:
+ *             description: Successfully created
+ *             content:
+ *                application/json:
+ *                   schema:
+ *                      type: object
+ */
+
+
