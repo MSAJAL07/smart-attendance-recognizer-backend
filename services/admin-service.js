@@ -4,6 +4,7 @@ const userModel=require('../models/users');
 const  organizationModel=require('../models/organizations');
 const studentModel=require('../models/students');
 const teacherModel=require('../models/teachers');
+const ObjectId=require('mongodb').ObjectID;
 const crypto=require('crypto');
 
 module.exports.adminRegistration=async (body)=>{
@@ -148,4 +149,14 @@ module.exports.teacherRegistration=async (body,user)=>
       message: "Teacher profile created successfully"
    }
 
+}
+
+
+module.exports.getAllCollegeStudents=(data)=>{
+   var result=studentModel.find({org_id:ObjectId(data.org_id)});
+   return {
+      status:true,
+      data:result,
+      message: "List of studnets in the college"
+   }
 }

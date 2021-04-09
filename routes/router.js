@@ -21,7 +21,7 @@ router.get('/user-profile',userController.getUserProfile);
 /**********************admin controller *************************/
 router.post('/student-registration',authController.restrictTo(constants.roles.admin),adminController.studentRegistration);
 router.post('/teacher-registration',authController.restrictTo(constants.roles.admin),adminController.teacherRegistration);
-
+router.get('/get-all-students',authController.restrictTo(constants.roles.teacher,constants.roles.admin),adminController.getAllCollegeStudents);
 /**********************class controller *************************/
 router.post('/classes/create-class',authController.restrictTo(constants.roles.teacher,constants.roles.admin),classController.crerateClass);
 router.put('/classes/:id/add-students',authController.restrictTo(constants.roles.teacher,constants.roles.admin),classController.addStudents);

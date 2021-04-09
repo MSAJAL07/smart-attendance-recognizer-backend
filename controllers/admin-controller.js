@@ -63,3 +63,22 @@ module.exports.teacherRegistration=async (req,res,next)=>{
      return next(error);
    }
 }
+
+
+module.exports.getAllCollegeStudents=async (req,res,next)=>{
+   try{        
+        var result=await adminService.getAllCollegeStudents(req.user);
+
+        if(result.status)
+        {
+           return response(req,res,result.message,result.data,constants.statuscodes.success);
+        }
+        else{
+           return next(new AppError(result.message,result.statuscode));
+        }
+
+   }catch(error)
+   {
+     return next(error);
+   }
+}
