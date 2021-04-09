@@ -152,8 +152,8 @@ module.exports.teacherRegistration=async (body,user)=>
 }
 
 
-module.exports.getAllCollegeStudents=(data)=>{
-   var result=studentModel.find({org_id:ObjectId(data.org_id)});
+module.exports.getAllCollegeStudents=async (data)=>{
+   var result=await studentModel.find({org_id:ObjectId(data.org_id)});
    return {
       status:true,
       data:result,
