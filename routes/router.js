@@ -5,6 +5,8 @@ const userController=require('../controllers/user-controller');
 const adminController=require('../controllers/admin-controller');
 const authController=require('../controllers/AuthController');
 const classController=require('../controllers/class-controller');
+const attendanceController=require('../controllers/attendance-controller');
+const upload=require('../controllers/uploadController');
 const constants = require('../constants/constants');
 
 router.get('/',(req,res)=>{
@@ -27,4 +29,8 @@ router.post('/classes/create-class',authController.restrictTo(constants.roles.te
 router.put('/classes/:id/add-students',authController.restrictTo(constants.roles.teacher,constants.roles.admin),classController.addStudents);
 router.get('/classes/get-classes',classController.getClasses);
 router.get('/classes/:class_id/get-students',classController.getStudents);
+
+/**********************attendance controller ********************/
+router.post('/upload-student-images',authController.restrictTo(constants.roles.admin),upload.array("studentImages",100),attendanceController.processImages);
+
 module.exports=router;
