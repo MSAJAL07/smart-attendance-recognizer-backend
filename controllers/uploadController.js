@@ -1,18 +1,25 @@
 const multer=require('multer');
+const path=require('path');
+const fs=require('fs');
+const AppError = require('../config/error');
 var storage = multer.diskStorage({
    destination: function (req, file, cb) {
  
        // Uploads is the Upload_folder_name
-       cb(null, "./studentImages/"+req.body.user_id);
+       fs.mkdir("./studentImages/"+req.params.user_id,(error)=>{
+        if(error) console.log(error);
+        cb(null, "./studentImages/"+req.params.user_id);
+       });
+       
    },
    filename: function (req, file, cb) {
-     cb(null, req.body.user_id+"_"+Date.now()+".jpg");
+     cb(null, req.params.user_id+"_"+Date.now()+".jpg");
    }
  })
 
- module.exports.upload = multer({ 
+ module.exports= multer({ 
    storage: storage,
-   limits: { fileSize: maxSize },
+   //limits: { fileSize: maxSize },
    fileFilter: function (req, file, cb){
    
        // Set the filetypes, it is optional

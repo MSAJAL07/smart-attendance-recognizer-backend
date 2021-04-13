@@ -31,6 +31,6 @@ router.get('/classes/get-classes',classController.getClasses);
 router.get('/classes/:class_id/get-students',classController.getStudents);
 
 /**********************attendance controller ********************/
-router.post('/upload-student-images',authController.restrictTo(constants.roles.admin),upload.array("studentImages",100),attendanceController.processImages);
+router.post('/upload-student-images/:user_id',authController.restrictTo(constants.roles.admin),upload.array("studentImages",100),attendanceController.processImages);
 
 module.exports=router;
