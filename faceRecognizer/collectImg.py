@@ -4,7 +4,7 @@ import csv
 
 def TakeImages(Id,name):        
         cam = cv2.VideoCapture(0)
-        harcascadePath = "haarcascade_frontalface_default.xml"
+        harcascadePath = "./faceRecognizer/haarcascade_frontalface_default.xml"
         detector=cv2.CascadeClassifier(harcascadePath)
         sampleNum=0
         while(True):
@@ -16,23 +16,23 @@ def TakeImages(Id,name):
  
                 sampleNum=sampleNum+1
 
-                cv2.imwrite("TrainingImage/TrainingImage "+name +"."+Id +'.'+ str(sampleNum) + ".jpg", gray[y:y+h,x:x+w])
+                cv2.imwrite("./faceRecognizer/TrainingImage/TrainingImage "+name +"."+Id +'.'+ str(sampleNum) + ".jpg", gray[y:y+h,x:x+w])
 
                 cv2.imshow('frame',img)
 
             if cv2.waitKey(100) & 0xFF == ord('q'):
                 break
 
-            elif sampleNum>50:
+            elif sampleNum>500:
                 break
         cam.release()
         cv2.destroyAllWindows() 
         res = "Images Saved for ID : " + Id +" Name : "+ name
         row = [Id , name]
-        with open('StudentDetails/StudentDetails.csv','a+') as csvFile:
+        with open('./faceRecognizer/StudentDetails/StudentDetails.csv','a+') as csvFile:
             writer = csv.writer(csvFile)
             writer.writerow(row)
         csvFile.close()
         print(res)
 
-TakeImages("46","sajal");
+TakeImages("46","Sajal");

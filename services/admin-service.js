@@ -6,6 +6,7 @@ const studentModel=require('../models/students');
 const teacherModel=require('../models/teachers');
 const ObjectId=require('mongodb').ObjectID;
 const crypto=require('crypto');
+var spawn = require("child_process").spawn;
 
 module.exports.adminRegistration=async (body)=>{
       var user=await userModel.findOne({email_id:body.email_id,user_type:constants.roles.admin});
@@ -159,4 +160,17 @@ module.exports.getAllCollegeStudents=async (data)=>{
       data:result,
       message: "List of studnets in the college"
    }
+}
+
+module.exports.run=async (req, res)=>{
+         console.log("data ")
+         var process = spawn('python3',['./collectImg.py'] );
+       await  process.stdout.on('data', (data) => {        
+         console.log(data)
+         return {
+            status: true,
+            data:" ",
+            message: "List of studnets in the college"
+         }
+      } )   
 }

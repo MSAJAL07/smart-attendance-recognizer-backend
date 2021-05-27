@@ -3,6 +3,7 @@ const express=require('express');
 const bodyParser=require('body-parser');
 const swaggerUi = require('swagger-ui-express')
 const swaggerJSDoc = require('swagger-jsdoc');
+var cors = require('cors')
 
 const envFile=require('dotenv');
 envFile.config();
@@ -13,6 +14,7 @@ const db=require('./config/db');
 const errorHandler=require('./controllers/ErrorController');
 
 var app=express();
+app.use(cors())
 
 const swaggerDefinition = {
    info: {
