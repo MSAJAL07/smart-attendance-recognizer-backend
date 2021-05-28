@@ -5,7 +5,8 @@ const constants=require('../constants/constants')
 
 module.exports.processImages=async (req,res,next)=>{
    try{
-        var result=await attendanceService.processImages(req.body);
+      console.log(req.parans)
+        var result=await attendanceService.processImages(req.body,req.files);
 
         if(result.status)
         {

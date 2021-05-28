@@ -26,7 +26,7 @@ module.exports.login=async (data) =>{
          token=await authService.generateToken({id:user._id,user_type:user.user_type,org_id:user.org_id});
          return {
             status:true,
-            data:"",
+            data:user,
             token:token,
             message:"Logged in successfully"
          }

@@ -17,13 +17,17 @@ router.get('/',(req,res)=>{
 router.post('/college-registration',adminController.adminRegistration);
 router.post('/login',userController.login);
 
-router.use(authController.authorizeToken);  /*AUTHORIZATION TOKEN VERIFICATION */
+//router.use(authController.authorizeToken);  /*AUTHORIZATION TOKEN VERIFICATION */
 
 router.get('/user-profile',userController.getUserProfile);
 /**********************admin controller *************************/
 router.post('/student-registration',authController.restrictTo(constants.roles.admin),adminController.studentRegistration);
 router.post('/teacher-registration',authController.restrictTo(constants.roles.admin),adminController.teacherRegistration);
 router.get('/get-all-students',authController.restrictTo(constants.roles.teacher,constants.roles.admin),adminController.getAllCollegeStudents);
+router.get('/collectImg',adminController.collectImg);
+router.get('/trainData',adminController.trainData);
+router.get('/takeatten',adminController.takeatten);
+
 /**********************class controller *************************/
 router.post('/classes/create-class',authController.restrictTo(constants.roles.teacher,constants.roles.admin),classController.crerateClass);
 router.put('/classes/:id/add-students',authController.restrictTo(constants.roles.teacher,constants.roles.admin),classController.addStudents);
@@ -31,6 +35,6 @@ router.get('/classes/get-classes',classController.getClasses);
 router.get('/classes/:class_id/get-students',classController.getStudents);
 
 /**********************attendance controller ********************/
-router.post('/upload-student-images/:user_id',authController.restrictTo(constants.roles.admin),upload.array("studentImages",100),attendanceController.processImages);
+router.post('/upload-student-images/:user_id',upload.array("studentImages"),attendanceController.processImages);
 
 module.exports=router;

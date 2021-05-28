@@ -18,11 +18,11 @@ def getImagesAndLabels(path):
 
 def TrainImages():
     recognizer = cv2.face_LBPHFaceRecognizer.create()
-    harcascadePath = "haarcascade_frontalface_default.xml"
+    harcascadePath = "./faceRecognizer/haarcascade_frontalface_default.xml"
     detector =cv2.CascadeClassifier(harcascadePath)
-    faces,Id = getImagesAndLabels("TrainingImage")
+    faces,Id = getImagesAndLabels("./faceRecognizer/TrainingImage")
     recognizer.train(faces, np.array(Id))
-    recognizer.save("TrainingImageLabel/Trainner.yml")
+    recognizer.save("./faceRecognizer/TrainingImageLabel/Trainner.yml")
     res = "Image Trained"
     print(res)
 

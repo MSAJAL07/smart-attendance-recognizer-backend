@@ -1,5 +1,7 @@
 const AppError=require('../config/error');
 const response=require('./ResponseController');
+var spawn = require("child_process").spawn;
+
 
 const userModel=require('../models/users');
 const adminValidation=require('../validations/admin-validation');
@@ -82,3 +84,91 @@ module.exports.getAllCollegeStudents=async (req,res,next)=>{
      return next(error);
    }
 }
+
+
+module.exports.collectImg= (req,res)=>{
+let runPy = new Promise(function(success, nosuccess) {
+   console.log("dataaaaaaaaaaaaa111111");
+    const pyprog = spawn('python3',['./faceRecognizer/collectImg.py'] );
+ 
+    pyprog.stdout.on('data', function(data) {
+       console.log("dataaaaaaaaaaaaa222222222222")
+ 
+        success(data);
+    });
+ 
+    pyprog.stderr.on('data', (data) => {
+       console.log("dataaaaaaaaaaaaa33333333333", data.toString())
+        nosuccess(data);
+    });
+ });
+
+console.log("dataaaaaaaaaaaaa")
+
+runPy.then(function(fromRunpy) {
+   res.write('welcome\n');
+   console.log(fromRunpy.toString());
+   res.end(fromRunpy);
+});
+
+}
+
+
+
+module.exports.trainData= (req,res)=>{
+   let runPy = new Promise(function(success, nosuccess) {
+      console.log("dataaaaaaaaaaaaa111111");
+       const pyprog = spawn('python3',['./faceRecognizer/trainData.py'] );
+    
+       pyprog.stdout.on('data', function(data) {
+          console.log("dataaaaaaaaaaaaa222222222222")
+    
+           success(data);
+       });
+    
+       pyprog.stderr.on('data', (data) => {
+          console.log("dataaaaaaaaaaaaa33333333333", data.toString())
+           nosuccess(data);
+       });
+    });
+   
+   console.log("dataaaaaaaaaaaaa")
+   
+   runPy.then(function(fromRunpy) {
+      res.write('welcome\n');
+      console.log(fromRunpy.toString());
+      res.end(fromRunpy);
+   });
+   
+   }
+
+
+
+
+   module.exports.takeatten= (req,res)=>{
+      let runPy = new Promise(function(success, nosuccess) {
+         console.log("dataaaaaaaaaaaaa111111");
+          const pyprog = spawn('python3',['./faceRecognizer/takeatten.py'] );
+       
+          pyprog.stdout.on('data', function(data) {
+             console.log("dataaaaaaaaaaaaa222222222222")
+       
+              success(data);
+          });
+       
+          pyprog.stderr.on('data', (data) => {
+             console.log("dataaaaaaaaaaaaa33333333333", data.toString())
+              nosuccess(data);
+          });
+       });
+      
+      console.log("dataaaaaaaaaaaaa")
+      
+      runPy.then(function(fromRunpy) {
+         res.write('welcome\n');
+         console.log(fromRunpy.toString());
+         res.end(fromRunpy);
+      });
+      
+      }
+
