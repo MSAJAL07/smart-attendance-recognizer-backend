@@ -5,7 +5,7 @@ const constants=require('../constants/constants')
 
 module.exports.processImages=async (req,res,next)=>{
    try{
-      console.log(req.parans)
+      //console.log(req.parans)
         var result=await attendanceService.processImages(req.body,req.files);
 
         if(result.status)
@@ -19,5 +19,21 @@ module.exports.processImages=async (req,res,next)=>{
    }catch(error)
    {
      return next(error);
+   }
+}
+
+module.exports.getAllAttendance = async (req, res, next) => {
+   try {
+      var result = await attendanceService.getAllAttendance(req);
+
+      if (result.status) {
+         return response(req, res, result.message, result.data, constants.statuscodes.success);
+      }
+      else {
+         return next(new AppError(result.message, result.statuscode));
+      }
+
+   } catch (error) {
+      return next(error);
    }
 }

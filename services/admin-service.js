@@ -164,7 +164,7 @@ module.exports.getAllCollegeStudents=async (data)=>{
 
 module.exports.run=async (req, res)=>{
          console.log("data ")
-         var process = spawn('python3',['./collectImg.py'] );
+         var process = spawn('python',['./collectImg.py',req.query.id,req.query.name] );
        await  process.stdout.on('data', (data) => {        
          console.log(data)
          return {

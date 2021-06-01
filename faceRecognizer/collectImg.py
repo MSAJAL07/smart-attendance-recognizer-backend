@@ -1,6 +1,6 @@
 import cv2
 import csv
-
+import sys
 
 def TakeImages(Id,name):        
         cam = cv2.VideoCapture(0)
@@ -35,4 +35,4 @@ def TakeImages(Id,name):
         csvFile.close()
         print(res)
 
-TakeImages("46","Sajal");
+TakeImages(sys.argv[1],sys.argv[2])
