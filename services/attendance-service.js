@@ -12,20 +12,25 @@ module.exports.processImages=async (data,files)=>{
 
 module.exports.getAllAttendance=(req)=>{
    const fdir=path.join(__dirname,'../','faceRecognizer/Attendance');
+   console.log(fdir);
    var result=[];
    var oneFile;
    fs.readdirSync(fdir).forEach((file)=>{
+     // console.log(file);
       var data=fs.readFileSync(path.join(__dirname,'../','faceRecognizer/Attendance',file),'utf-8');
-      var chunks=data.split('\r\n');
+      var chunks=data.split('\n');
+     // console.log(chunks);
       oneFile=[];
       for(var i=1;i<chunks.length-1;i++)
       {
          var row=chunks[i].split(',');
+         //console.log(row[1].split('\''))
+         //let tmp = row[1].split('\'').
          var id=row[0];
-         var name=row[1];
+         var name=row[1].split('\'')[1];
          var date=row[2];
          var time=row[3];
-         console.log(id,name);
+        // console.log("cahal");
          var doc={};
          doc.id=id;
          doc.name=name;
@@ -35,7 +40,7 @@ module.exports.getAllAttendance=(req)=>{
       }
       result.push(oneFile);
    });
-   console.log(result);
+  // console.log(result);
    return  {
       status:true,
       data:result,
@@ -43,4 +48,4 @@ module.exports.getAllAttendance=(req)=>{
    }
 
 }
-module.exports.getAllAttendance('sds')
+//module.exports.getAllAttendance('sds')

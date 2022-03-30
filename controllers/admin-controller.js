@@ -89,7 +89,7 @@ module.exports.getAllCollegeStudents=async (req,res,next)=>{
 module.exports.collectImg= (req,res)=>{
 let runPy = new Promise(function(success, nosuccess) {
    console.log("dataaaaaaaaaaaaa111111");
-    const pyprog = spawn('python3',['./faceRecognizer/collectImg.py'] );
+   const pyprog = spawn('python3',['./faceRecognizer/collectImg.py',req.query.id,req.query.name] );
  
     pyprog.stdout.on('data', function(data) {
        console.log("dataaaaaaaaaaaaa222222222222")
